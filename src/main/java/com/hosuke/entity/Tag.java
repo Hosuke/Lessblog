@@ -5,7 +5,7 @@ import java.util.Collection;
 
 public class Tag {
 
-    private Long Id;
+    private Long id;
 
     private String name;
 
@@ -19,11 +19,11 @@ public class Tag {
     }
 
     public Long getId() {
-        return Id;
+        return this.id;
     }
 
     public void setId(Long id) {
-        Id = id;
+        this.id = id;
     }
 
     public String getName() {

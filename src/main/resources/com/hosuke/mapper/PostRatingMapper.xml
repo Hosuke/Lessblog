@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.hosuke.mapper.PostRatingMapper">
+
+    <resultMap id="PostRatingMap" type="postRating">
+        <id column="id" property="id"/>
+        <result column="value" property="value"/>
+        <association property="post" column="post_id" select="com.hosuke.mapper.PostMapper.selectById"/>
+        <association property="user" column="user_id" select="com.hosuke.mapper.UserMapper.selectUid"/>
+    </resultMap>
+
+    <select id="findUserRating" resultMap="PostRatingMap" parameterType="postRating">
+        SELECT * FROM post_ratings WHERE post_id = #{post.id} AND user_id = #{user.id}
+    </select>
+
+    <select id="selectByPost" resultType="postRating" parameterType="java.lang.Integer">
+        SELECT * FROM post_ratings WHERE post_id = #{postId}
+    </select>
+
+</mapper>

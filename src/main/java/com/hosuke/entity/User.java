@@ -15,7 +15,7 @@ public class User {
     public interface ChangePasswordValidationGroup {}
     public interface ProfileInfoValidationGroup {}
 
-    private Long Id;
+    private Long id;
 
     private String username;
 
@@ -41,11 +41,11 @@ public class User {
     private String bigAvatarLink;
 
     public Long getId() {
-        return Id;
+        return this.id;
     }
 
     public void setId(Long id) {
-        Id = id;
+        this.id = id;
     }
 
     public String getUsername() {
@@ -158,7 +158,7 @@ public class User {
     @Override
     public String toString() {
         return "User{" +
-                "Id=" + Id +
+                "id=" + id +
                 ", username='" + username + '\'' +
                 ", email='" + email + '\'' +
                 ", enabled=" + enabled +

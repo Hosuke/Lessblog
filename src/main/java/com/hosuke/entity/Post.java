@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
 
 public class Post {
 
-    private Long Id;
+    private Long id;
 
     private String title;
 
@@ -31,6 +31,15 @@ public class Post {
     private List<Comment> comments = new ArrayList<>();
 
     private List<PostRating> postRatings = new ArrayList<>();
+
+    @Override
+    public String toString() {
+        return "Post{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", shortTextPart='" + shortTextPart + '\'' +
+                '}';
+    }
 
     public static String shortPartSeparator() {
         return "===cut===";
@@ -65,11 +74,11 @@ public class Post {
     }
 
     public Long getId() {
-        return Id;
+        return this.id;
     }
 
     public void setId(Long id) {
-        Id = id;
+        this.id = id;
     }
 
     public String getTitle() {

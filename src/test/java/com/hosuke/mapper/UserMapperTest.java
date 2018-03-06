@@ -13,6 +13,7 @@ public class UserMapperTest {
         System.out.println(mapper.findByUsernameIgnoreCase("admin"));
         System.out.println(mapper.findByEmailIgnoreCase("alice@gmail.com"));
         System.out.println(mapper.findByUsernameIgnoreCase("BOB"));
+        System.out.println(mapper.selectUid(3));
         MybatisUtils.closeSqlSession();
     }
 }

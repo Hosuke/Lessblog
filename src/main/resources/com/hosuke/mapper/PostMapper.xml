@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.hosuke.mapper.PostMapper">
+
+    <!--TODO: Complete this part-->
+    <!--<resultMap id="PostMap" type="post">-->
+        <!--<id column="id" property="id"/>-->
+        <!--<result column="dateTime" property="dateTime"/>-->
+        <!--<result column="fullPostText" property="fullPostText"/>-->
+        <!--<result column="hidden" property="hidden"/>-->
+        <!--<collection property="postRatings" column="post"-->
+    <!--</resultMap>-->
+
+    <select id="selectById"  resultType="post" parameterType="java.lang.Integer">
+        SELECT * FROM posts WHERE id = #{id};
+    </select>
+
+</mapper>

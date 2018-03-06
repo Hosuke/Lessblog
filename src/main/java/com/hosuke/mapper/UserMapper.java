@@ -10,10 +10,12 @@ public interface UserMapper {
 
     User findByUsernameOrEmail(User user);
 
+    User selectUid(int id);
+
     default User findByUsernameOrEmail(String username, String email) {
         User user = new User();
         user.setUsername(username);
         user.setEmail(email);
-        return findByUsernameOrEmail(user);
+        return this.findByUsernameOrEmail(user);
     }
 }

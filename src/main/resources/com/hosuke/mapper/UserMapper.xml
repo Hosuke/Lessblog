@@ -25,4 +25,8 @@
         SELECT * FROM users WHERE username = #{username} OR email = #{email}
     </select>
 
+    <select id="selectUid"  resultType="user" parameterType="java.lang.Integer">
+        SELECT * FROM users WHERE id = #{id};
+    </select>
+
 </mapper>

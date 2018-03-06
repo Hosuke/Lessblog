@@ -2,7 +2,7 @@ package com.hosuke.entity;
 
 public class PostEditDto {
 
-    private Long Id = null;
+    private Long id = null;
 
     private String title;
 
@@ -11,11 +11,11 @@ public class PostEditDto {
     private String tags = "";
 
     public Long getId() {
-        return Id;
+        return this.id;
     }
 
     public void setId(Long id) {
-        Id = id;
+        this.id = id;
     }
 
     public String getTitle() {

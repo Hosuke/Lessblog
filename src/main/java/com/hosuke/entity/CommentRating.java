@@ -3,7 +3,7 @@ package com.hosuke.entity;
 
 public class CommentRating extends Rating {
 
-    private Long Id;
+    private Long id;
 
     private Comment comment;
 
@@ -16,11 +16,11 @@ public class CommentRating extends Rating {
     }
 
     public Long getId() {
-        return Id;
+        return this.id;
     }
 
     public void setId(Long id) {
-        Id = id;
+        this.id = id;
     }
 
     public Comment getComment() {
