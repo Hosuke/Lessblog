@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--mapper: 秒速对象和记录之间的映射关系
+    namespace: 隔离sql, 在mapper代理时有特殊用法
+-->
+<mapper namespace="com.hosuke.mapper.UserMapper">
+
+    <!--查询的映射
+        resultType:结果类型
+        #{}代表占位符
+        -->
+
+    <select id="findByUsernameIgnoreCase" resultType="user" parameterType="String">
+        SELECT * FROM users WHERE username = #{username}
+    </select>
+
+    <select id="findByEmailIgnoreCase" resultType="user" parameterType="String">
+        SELECT * FROM users WHERE email = #{email}
+    </select>
+
+    <select id="findByUsernameOrEmail" resultType="user" parameterType="user">
+        SELECT * FROM users WHERE username = #{username} OR email = #{email}
+    </select>
+
+</mapper>
