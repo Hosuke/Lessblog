@@ -14,7 +14,7 @@ public class PostRatingMapperTest {
         SqlSession session = MybatisUtils.getSession();
         PostRatingMapper mapper = session.getMapper(PostRatingMapper.class);
 
-//        System.out.println(mapper.findUserRating(3l,  85l));
+//        System.out.println(mapper.findUserRating(3l,  83l));
         PostRating postRating = new PostRating();
         Post post = new Post();
         post.setId(85l);

@@ -16,6 +16,11 @@
         SELECT * FROM post_ratings WHERE post_id = #{post.id} AND user_id = #{user.id}
     </select>
 
+    <!--<select id="findUserRating" resultMap="PostRatingMap" parameterType="map">-->
+        <!--SELECT * FROM post_ratings WHERE post_id = #{post_id} AND user_id = #{user_id}-->
+    <!--</select>-->
+
+
     <select id="selectByPost" resultType="postRating" parameterType="java.lang.Integer">
         SELECT * FROM post_ratings WHERE post_id = #{postId}
     </select>

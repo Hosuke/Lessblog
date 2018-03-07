@@ -13,17 +13,20 @@ public interface PostRatingMapper {
 
     List<PostRating> selectByPost(int postId);
 
+
+    // Unable to work FIXME
+//    PostRating findUserRating(@Param("post_id") Long postId, @Param("user_id") Long userId);
     PostRating findUserRating(PostRating postRating);
 
-    default PostRating findUserRating(Long postId, Long userId) {
-        PostRating postRating = new PostRating();
-        Post post = new Post();
-        post.setId(postId);
-        postRating.setPost(post);
-        User user = new User();
-        user.setId(userId);
-        postRating.setUser(user);
-        System.out.println(postRating);
-        return this.findUserRating(postRating);
-    }
+//    default PostRating findUserRating(Long postId, Long userId) {
+//        PostRating postRating = new PostRating();
+//        Post post = new Post();
+//        post.setId(postId);
+//        postRating.setPost(post);
+//        User user = new User();
+//        user.setId(userId);
+//        postRating.setUser(user);
+//        System.out.println(postRating);
+//        return this.findUserRating(postRating);
+//    }
 }

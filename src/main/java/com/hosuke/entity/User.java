@@ -26,7 +26,8 @@ public class User {
 
     private boolean enabled;
 
-    private LocalDateTime registrationDate;
+//    private LocalDateTime registrationDate;
+    private Date registrationDate;
 
     private List<Role> roles = new ArrayList<>();
 
@@ -76,13 +77,22 @@ public class User {
         return enabled;
     }
 
-    public LocalDateTime getRegistrationDate() {
-        return registrationDate;
+//    public LocalDateTime getRegistrationDate() {
+//        return registrationDate;
+//    }
+
+    public Date getRegistrationDate() {
+        return this.registrationDate;
     }
 
-    public void setRegistrationDate(LocalDateTime registrationDate) {
-        this.registrationDate = registrationDate;
-    }
+//    public void setRegistrationDate(LocalDateTime registrationDate) {
+//        this.registrationDate = registrationDate;
+//    }
+
+    public void setRegistrationDate(Date registrationDate) {
+    this.registrationDate = registrationDate;
+}
+
 
     public List<Role> getRoles() {
         return roles;

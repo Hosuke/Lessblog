@@ -8,6 +8,7 @@ import com.hosuke.service.MarkdownConverter;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,9 +18,9 @@ public class Comment {
 
     private String commentText;
 
-    private LocalDateTime dateTime;
+    private Date dateTime;
 
-    private LocalDateTime modifiedDateTime;
+    private Date modifiedDateTime;
 
     private User user;
 
@@ -49,7 +50,7 @@ public class Comment {
     }
 
     public LocalDateTime maxDeleteTime() {
-        return dateTime.plusMinutes(10);
+        return dateTime.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime().plusMinutes(10);
     }
 
     // should refactor to store dates in UTC in database
@@ -63,7 +64,7 @@ public class Comment {
     }
 
     public LocalDateTime maxEditTime() {
-        return dateTime.plusMinutes(180);
+        return dateTime.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime().plusMinutes(180);
     }
 
     public long maxEditTimeUnixTimestamp() {
@@ -98,19 +99,19 @@ public class Comment {
         return MarkdownConverter.toHtml(getCommentText());
     }
 
-    public LocalDateTime getDateTime() {
+    public Date getDateTime() {
         return dateTime;
     }
 
-    public void setDateTime(LocalDateTime dateTime) {
+    public void setDateTime(Date dateTime) {
         this.dateTime = dateTime;
     }
 
-    public LocalDateTime getModifiedDateTime() {
+    public Date getModifiedDateTime() {
         return modifiedDateTime;
     }
 
-    public void setModifiedDateTime(LocalDateTime modifiedDateTime) {
+    public void setModifiedDateTime(Date modifiedDateTime) {
         this.modifiedDateTime = modifiedDateTime;
     }
 

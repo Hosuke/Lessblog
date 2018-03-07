@@ -6,10 +6,7 @@ import com.hosuke.service.MarkdownConverter;
 import org.springframework.util.StringUtils;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Post {
@@ -22,7 +19,8 @@ public class Post {
 
     private String fullPostText;
 
-    private LocalDateTime dateTime;
+//    private LocalDateTime dateTime;
+    private Date dateTime;
 
     private boolean hidden = false;
 
@@ -113,11 +111,11 @@ public class Post {
         this.tags = tags;
     }
 
-    public LocalDateTime getDateTime() {
+    public Date getDateTime() {
         return dateTime;
     }
 
-    public void setDateTime(LocalDateTime dateTime) {
+    public void setDateTime(Date dateTime) {
         this.dateTime = dateTime;
     }
 

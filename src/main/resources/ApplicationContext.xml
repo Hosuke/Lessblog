@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans 
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context 
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/aop 
+        http://www.springframework.org/schema/aop/spring-aop.xsd
+         http://www.springframework.org/schema/tx 
+        http://www.springframework.org/schema/tx/spring-tx.xsd">
+        
+        <context:component-scan base-package="com.hosuke.service"></context:component-scan>
+        <!-- 1.创建数据源 -->
+        <!--1.1 加载属性文件  -->
+        <context:property-placeholder location="classpath:jdbc.properties"/>
+		<bean id="ds" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		    <property name="driverClassName" value="${db.driver}"/>
+			<property name="url" value="${db.url}"/>
+			<property name="username" value="${db.user}"/>
+			<property name="password" value="${db.password}"/>
+		</bean>
+
+        <!-- 2.创建sqlsessionFactory -->
+        <bean id="ssf" class="org.mybatis.spring.SqlSessionFactoryBean">
+        	<property name="dataSource" ref="ds"></property>
+        	<property name="configLocation" value="classpath:Mybatis.xml"></property>
+        </bean>
+
+        <!-- 3.创建mapper代理  
+        		 单个代理对象创建:org.mybatis.spring.mapper.MapperFactoryBean
+        		 批量创建所有mapper接口的代理对象:org.mybatis.spring.mapper.MapperScannerConfigurer
+        		 
+        		 sqlSessionFactoryBeanName:ssf的名称
+        		 basePackage:映射文件和接口的包名
+        		-->
+        <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        	<property name="sqlSessionFactoryBeanName" value="ssf"></property>
+        	<property name="basePackage" value="com.hosuke.mapper"></property>
+        </bean>
+
+ 		<!-- 4.声明式事务 -->
+ 			<!--4.1 配置事务管理器  -->
+ 			<bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+ 				<property name="dataSource" ref="ds"></property>
+ 			</bean>
+
+ 			<!-- 4.2 配置事务策略 -->
+ 			<tx:advice id="txAdvice" transaction-manager="txManager">
+ 				<tx:attributes>
+ 					<tx:method name="query*" read-only="true"/>
+ 					<tx:method name="find*" read-only="true"/>
+ 					<tx:method name="insert*" propagation="REQUIRED"/>
+ 					<tx:method name="update*" propagation="REQUIRED"/>
+ 					<tx:method name="delete*" propagation="REQUIRED"/>
+ 				</tx:attributes>
+ 			</tx:advice>
+
+ 			<!-- 4.3 织入事务 -->
+ 			<aop:config>
+ 				<aop:pointcut expression="execution(* com.hosuke.service..*(..))" id="pointCut"/>
+ 				<aop:advisor advice-ref="txAdvice" pointcut-ref="pointCut"/>
+ 			</aop:config>
+</beans>
