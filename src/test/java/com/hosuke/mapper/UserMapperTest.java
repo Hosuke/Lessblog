@@ -1,6 +1,6 @@
 package com.hosuke.mapper;
 
-import com.hosuke.util.MybatisUtils;
+import com.hosuke.utils.MybatisUtils;
 import org.apache.ibatis.session.SqlSession;
 import org.junit.Test;
 

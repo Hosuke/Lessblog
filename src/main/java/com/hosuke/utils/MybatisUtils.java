@@ -1,4 +1,4 @@
-package com.hosuke.util;
+package com.hosuke.utils;
 
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;

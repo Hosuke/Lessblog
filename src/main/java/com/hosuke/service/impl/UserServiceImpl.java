@@ -82,7 +82,7 @@ public class UserServiceImpl implements UserService {
 
         user.setEnabled(true);
 
-        // TODO: may make a util
+        // TODO: may make a utils
 //        user.setRegistrationDate(LocalDateTime.now());
         user.setRegistrationDate(Date.from(LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant()));
 

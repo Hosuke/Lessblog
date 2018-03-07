@@ -1,6 +1,7 @@
 package com.hosuke.service;
 
 import com.hosuke.entity.User;
+import com.hosuke.service.Exception.AuthException;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
 public interface UserService extends UserDetailsService {
@@ -15,9 +16,9 @@ public interface UserService extends UserDetailsService {
 
     void register(User user);
 
-    void changeEmail(String newEmail, String currentPassword) throws Exception; //AuthException;
+    void changeEmail(String newEmail, String currentPassword) throws AuthException;
 
-    void changePassword(String newPassword, String currentPassword) throws Exception; //AuthException;
+    void changePassword(String newPassword, String currentPassword) throws AuthException;
 
     void changeProfileInfo(User newProfileInfo);
 

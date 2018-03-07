@@ -3,7 +3,7 @@ package com.hosuke.mapper;
 import com.hosuke.entity.Post;
 import com.hosuke.entity.PostRating;
 import com.hosuke.entity.User;
-import com.hosuke.util.MybatisUtils;
+import com.hosuke.utils.MybatisUtils;
 import org.apache.ibatis.session.SqlSession;
 import org.junit.Test;
 
