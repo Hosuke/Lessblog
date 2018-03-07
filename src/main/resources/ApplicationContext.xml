@@ -42,6 +42,17 @@
         	<property name="basePackage" value="com.hosuke.mapper"></property>
         </bean>
 
+        <!-- persistance -->
+        <bean id="entityManagerFactory"
+              class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+            <property name="dataSource" ref="ds" />
+            <property name="jpaVendorAdapter">
+                <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+                    <property name="showSql" value="true"/>
+                </bean>
+            </property>
+        </bean>
+
  		<!-- 4.声明式事务 -->
  			<!--4.1 配置事务管理器  -->
  			<bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">

@@ -21,7 +21,9 @@ import java.util.List;
 @Service("avatarService")
 public class AvatarServiceImpl implements AvatarService {
 
-    @Value("${uploading.dirpath}")
+//    FIXME
+//    @Value("${uploading.dirpath}")
+    @Value("file:/upload/")
     private String uploadingDirPath;
 
     @Autowired

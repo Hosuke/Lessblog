@@ -40,7 +40,10 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
-        User user = userMapper.findByUsernameOrEmail(s, s);
+        User tempuser = new User();
+        tempuser.setUsername(s);
+        tempuser.setEmail(s);
+        User user = userMapper.findByUsernameOrEmail(tempuser);
 
         if (user == null)
             throw new UsernameNotFoundException("no such user");

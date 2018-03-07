@@ -14,11 +14,11 @@
         <!--<collection property="postRatings" column="post"-->
     <!--</resultMap>-->
 
-    <select id="selectById"  resultType="post" parameterType="java.lang.Long">
+    <select id="selectById"  resultMap="BaseResultMap" parameterType="java.lang.Long">
         SELECT * FROM posts WHERE id = #{id};
     </select>
 
-    <select id="selectNotHidden" resultType="post">
+    <select id="selectNotHidden" resultMap="BaseResultMap">
         SELECT * FROM posts WHERE hidden = FALSE
     </select>
 
@@ -34,6 +34,7 @@
         <result column="title" property="title" jdbcType="VARCHAR" />
         <result column="fullPostText" property="fullPostText" jdbcType="LONGVARCHAR" />
         <result column="shortTextPart" property="shortTextPart" jdbcType="LONGVARCHAR" />
+        <collection property="comments" ofType="comment" column="id" select="com.hosuke.mapper.CommentMapper.selectByPostId"/>
     </resultMap>
 
     <resultMap id="ResultMapWithBLOBs" type="com.hosuke.entity.Post" >

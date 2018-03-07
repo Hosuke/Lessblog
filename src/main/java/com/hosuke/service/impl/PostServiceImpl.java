@@ -12,6 +12,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.data.domain.Page;
 //import org.springframework.data.domain.PageRequest;
 //import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -38,14 +42,15 @@ public class PostServiceImpl implements PostService {
     //TODO: rewrite with pagehelper
 
     @Override
-    public List<Post> getPostsPage(int pageNumber, int pageSize) {
-//        PageRequest pageRequest = new PageRequest(pageNumber, pageSize, Sort.Direction.DESC, "dateTime");
+    public Page<Post> getPostsPage(int pageNumber, int pageSize) {
+        PageRequest pageRequest = new PageRequest(pageNumber, pageSize, Sort.Direction.DESC, "dateTime");
 //
 //        if (userService.isAdmin())
 //            return postMapper.findAll(pageRequest);
 //
 //        return postRepository.findByHiddenFalse(pageRequest);
-        return null;
+//        PageRequest pageRequest = new PageRequest(0, 10);
+        return (Page<Post>) new PageImpl<Post>(postMapper.selectNotHidden(), pageRequest, 85);
     }
 
     @Override
@@ -59,10 +64,11 @@ public class PostServiceImpl implements PostService {
     // probably needs to be cached somehow
     @Override
     public List<Post> getTopPostsList() {
+        //TODO:
 //        PageRequest pageRequest = new PageRequest(0, 10);
 //
 //        return postRepository.findTopPosts(pageRequest);
-        return null;
+        return postMapper.selectNotHidden();
     }
 
     @Override
@@ -81,16 +87,17 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public List<Post> findPostsByTag(List<String> tags, int pageNumber, int pageSize) {
+    public Page<Post> findPostsByTag(List<String> tags, int pageNumber, int pageSize) {
+        // TODO:
 //        tags = tags.stream().map(String::toLowerCase).collect(Collectors.toList());
 //
-//        PageRequest pageRequest = new PageRequest(pageNumber, pageSize, Sort.Direction.DESC, "dateTime");
+        PageRequest pageRequest = new PageRequest(pageNumber, pageSize, Sort.Direction.DESC, "dateTime");
 //
 //        if (userService.isAdmin())
 //            return postRepository.findByTags(tags, (long) tags.size(), pageRequest);
 //
 //        return postRepository.findByTagsAndNotHidden(tags, (long) tags.size(), pageRequest);
-        return null;
+        return (Page<Post>) new PageImpl<Post>(postMapper.selectNotHidden(), pageRequest, 85);
     }
 
     @Override

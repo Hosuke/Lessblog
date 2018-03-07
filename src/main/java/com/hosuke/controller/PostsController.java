@@ -10,6 +10,7 @@ import com.hosuke.service.PostService;
 import com.hosuke.service.UserService;
 import com.hosuke.utils.JsonUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+//import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Page;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -18,7 +19,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.validation.Valid;
+//import javax.validation.Valid;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -35,14 +36,16 @@ public class PostsController {
     // TODO:
     @RequestMapping(value = {"/", "/posts"}, method = RequestMethod.GET)
     public String showPostsList(@RequestParam(value = "page", defaultValue = "0") Integer pageNumber, ModelMap model) {
-//        Page<Post> postsPage = postService.getPostsPage(pageNumber, 10);
-//
-//        model.addAttribute("postsPage", postsPage);
-//
-//        // should implement custom Spring Security  UserDetails instead of this, so it will be stored in session
-//        User currentUser = userService.currentUser();
-//        if (currentUser != null)
-//            model.addAttribute("userId", currentUser.getId());
+        // TODO:
+        Page<Post> postsPage = postService.getPostsPage(pageNumber, 10);
+//        List<Post> postsPage = postService.getPostsPage(pageNumber, 10);
+
+        model.addAttribute("postsPage", postsPage);
+
+        // should implement custom Spring Security  UserDetails instead of this, so it will be stored in session
+        User currentUser = userService.currentUser();
+        if (currentUser != null)
+            model.addAttribute("userId", currentUser.getId());
 
         return "posts";
     }
@@ -71,19 +74,20 @@ public class PostsController {
         }
 
         // TODO:
-//        Page<Post> postsPage = postService.findPostsByTag(tagNames, pageNumber, 10);
-//
-//        model.addAttribute("postsPage", postsPage);
-//
-//        model.addAttribute("searchTags", tagNames);
-//
-//        String query = "tagged=" + request.getParameter("tagged");
-//        model.addAttribute("searchQuery", query);
-//
-//        // should implement custom Spring Security  UserDetails instead of this, so it will be stored in session
-//        User currentUser = userService.currentUser();
-//        if (currentUser != null)
-//            model.addAttribute("userId", currentUser.getId());
+        Page<Post> postsPage = postService.findPostsByTag(tagNames, pageNumber, 10);
+//        List<Post> postsPage = postService.findPostsByTag(tagNames, pageNumber, 10);
+
+        model.addAttribute("postsPage", postsPage);
+
+        model.addAttribute("searchTags", tagNames);
+
+        String query = "tagged=" + request.getParameter("tagged");
+        model.addAttribute("searchQuery", query);
+
+        // should implement custom Spring Security  UserDetails instead of this, so it will be stored in session
+        User currentUser = userService.currentUser();
+        if (currentUser != null)
+            model.addAttribute("userId", currentUser.getId());
 
         return "posts";
     }
@@ -124,7 +128,9 @@ public class PostsController {
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @RequestMapping(value = "/posts/create", method = RequestMethod.POST)
-    public String createPost(ModelMap model, @Valid @ModelAttribute("post") PostEditDto post, BindingResult result) {
+    public String createPost(ModelMap model,
+//                             @Valid
+                             @ModelAttribute("post") PostEditDto post, BindingResult result) {
         if (result.hasErrors()) {
             model.addAttribute("edit", false);
 
@@ -153,7 +159,9 @@ public class PostsController {
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @RequestMapping(value = "/posts/{postId}/edit", method = RequestMethod.POST)
-    public String updatePost(ModelMap model, @Valid @ModelAttribute("post") PostEditDto post, BindingResult result,
+    public String updatePost(ModelMap model,
+//                             @Valid
+                             @ModelAttribute("post") PostEditDto post, BindingResult result,
                                    @PathVariable("postId") Long postId) {
         post.setId(postId);
 

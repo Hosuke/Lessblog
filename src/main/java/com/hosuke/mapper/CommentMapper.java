@@ -9,6 +9,10 @@ import java.util.List;
 public interface CommentMapper {
     Comment selectById(Long id);
 
+    List<Comment> selectByPostId(Long postId);
+
+    List<Comment> selectChildrenComment(Long commentId);
+
     /**
      * The rest interfaces are generated
      */

@@ -36,6 +36,7 @@ public class Post {
                 "id=" + id +
                 ", title='" + title + '\'' +
                 ", shortTextPart='" + shortTextPart + '\'' +
+                ", comments=" + comments +
                 '}';
     }
 

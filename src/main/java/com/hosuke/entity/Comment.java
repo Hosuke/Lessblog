@@ -1,8 +1,5 @@
 package com.hosuke.entity;
 
-//import alexp.blog.service.MarkdownConverter;
-//import alexp.blog.utils.LocalDateTimePersistenceConverter;
-
 import com.hosuke.service.MarkdownConverter;
 
 import java.time.LocalDateTime;
@@ -36,6 +33,22 @@ public class Comment {
     private List<Comment> childrenComments = new ArrayList<>();
 
     private List<CommentRating> commentRatings = new ArrayList<>();
+
+    @Override
+    public String toString() {
+        return "Comment{" +
+                "id=" + id +
+                ", commentText='" + commentText + '\'' +
+                ", dateTime=" + dateTime +
+                ", modifiedDateTime=" + modifiedDateTime +
+                ", user=" + user +
+//                ", post=" + post +
+                ", deleted=" + deleted +
+//                ", parentComment=" + parentComment +
+                ", childrenComments=" + childrenComments +
+                ", commentRatings=" + commentRatings +
+                '}' + "\n";
+    }
 
     public int commentLevel() {
         Comment comment = this;

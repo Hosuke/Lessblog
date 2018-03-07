@@ -9,6 +9,14 @@
         SELECT * FROM comments WHERE id = #{id};
     </select>
 
+    <select id="selectByPostId" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        SELECT * FROM comments WHERE post_id = #{postId};
+    </select>
+
+    <select id="selectChildrenComment" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        SELECT * FROM comments WHERE parent_id = #{commentId};
+    </select>
+
     <resultMap id="BaseResultMap" type="com.hosuke.entity.Comment" >
         <!--
           WARNING - @mbggenerated
@@ -20,11 +28,12 @@
         <result column="deleted" property="deleted" jdbcType="BIT" />
         <result column="modifiedDateTime" property="modifiedDateTime" jdbcType="TIMESTAMP" />
         <!--<result column="parent_id" property="parent.id" jdbcType="BIGINT" />-->
-        <association property="parent" column="parent_id" select="com.hosuke.mapper.CommentMapper.selectById"/>
+        <association property="parentComment" column="parent_id" select="com.hosuke.mapper.CommentMapper.selectById"/>
         <!--<result column="post_id" property="post.id" jdbcType="BIGINT" />-->
         <association property="post" column="post_id" select="com.hosuke.mapper.PostMapper.selectById"/>
         <!--<result column="user_id" property="user.id" jdbcType="BIGINT" />-->
         <association property="user" column="user_id" select="com.hosuke.mapper.UserMapper.selectUid"/>
+        <collection property="childrenComments" ofType="comment" column="id" select="com.hosuke.mapper.CommentMapper.selectChildrenComment"/>
     </resultMap>
     <resultMap id="ResultMapWithBLOBs" type="com.hosuke.entity.Comment" extends="BaseResultMap" >
         <!--

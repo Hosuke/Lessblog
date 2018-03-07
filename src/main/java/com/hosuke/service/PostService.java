@@ -2,12 +2,13 @@ package com.hosuke.service;
 
 import com.hosuke.entity.Post;
 import com.hosuke.entity.PostEditDto;
+import org.springframework.data.domain.Page;
 
 import java.util.List;
 
 public interface PostService {
 
-    List<Post> getPostsPage(int pageNumber, int pageSize);
+    Page<Post> getPostsPage(int pageNumber, int pageSize);
 
     List<Post> getPostsList(int pageNumber, int pageSize);
 
@@ -17,7 +18,7 @@ public interface PostService {
 
     PostEditDto getEditablePost(Long id);
 
-    List<Post> findPostsByTag(List<String> tags, int pageNumber, int pageSize);
+    Page<Post> findPostsByTag(List<String> tags, int pageNumber, int pageSize);
 
     Post saveNewPost(PostEditDto postEditDto);
 

@@ -17,6 +17,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+//import javax.validation.Valid;
 import javax.validation.Valid;
 import java.util.List;
 
@@ -52,9 +53,15 @@ public class CommentController {
 
     @PreAuthorize("hasRole('ROLE_USER')")
     @RequestMapping(value = "/posts/{postId}/comments/create", method = RequestMethod.POST)
-    public @ResponseBody String addComment(@Valid @ModelAttribute(value = "comment") Comment comment, BindingResult result,
+    public @ResponseBody String addComment(
+            @Valid
+            @ModelAttribute(value = "comment") Comment comment, BindingResult result,
                                            @PathVariable("postId") Long postId,
                                            @RequestParam(value = "parentId", defaultValue = "") Long parentId) {
+
+
+        System.out.println("creating comment...");
+
         if (result.hasErrors()) {
             return makeCommentAddResponse("error", result.getAllErrors().get(0).getDefaultMessage());
         }
@@ -86,7 +93,9 @@ public class CommentController {
 
     @PreAuthorize("hasRole('ROLE_USER')")
     @RequestMapping(value = "/posts/{postId}/comments/{commentId}/edit", method = RequestMethod.POST)
-    public @ResponseBody String editComment(@Valid @ModelAttribute(value = "comment") Comment comment, BindingResult result,
+    public @ResponseBody String editComment(
+//            @Valid
+            @ModelAttribute(value = "comment") Comment comment, BindingResult result,
                                             @PathVariable("postId") Long postId, @PathVariable("commentId") Long commentId) {
         if (result.hasErrors()) {
             return result.getAllErrors().get(0).getDefaultMessage();
