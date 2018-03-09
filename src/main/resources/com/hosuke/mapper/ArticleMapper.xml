@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hosuke.dao.ArticleDao">
+    <resultMap id="ArticleLiteDto" type="com.hosuke.model.dto.ArticleLiteDto">
+        <id column="articleId" property="id"/>
+        <result column="title" property="title"/>
+        <result column="pubDate" property="pubDate"/>
+        <result column="clicks" property="clicks"/>
+        <result column="remark" property="remark"/>
+        <association property="user" javaType="com.hosuke.model.dto.UserDto">
+            <id column="userId" property="id"/>
+            <result column="imageName" property="imagePath"/>
+            <result column="state" property="state"/>
+            <result column="nickname" property="nickname"/>
+            <result column="email" property="email"/>
+            <result column="website" property="website"/>
+        </association>
+    </resultMap>
+
+    <resultMap id="ArticleDto" type="com.hosuke.model.dto.ArticleDto">
+        <id column="articleId" property="id"/>
+        <result column="title" property="title"/>
+        <result column="content" property="content"/>
+        <result column="markDown" property="markDown"/>
+        <result column="pubDate" property="pubDate"/>
+        <result column="clicks" property="clicks"/>
+        <result column="remark" property="remark"/>
+        <result column="picture" property="picture"/>
+        <result column="isDraft" property="isDraft"/>
+        <association property="user" javaType="com.hosuke.model.dto.UserDto">
+            <id column="userId" property="id"/>
+            <result column="imageName" property="imagePath"/>
+            <result column="state" property="state"/>
+            <result column="nickname" property="nickname"/>
+            <result column="email" property="email"/>
+            <result column="website" property="website"/>
+        </association>
+        <association property="category" javaType="com.hosuke.model.Category">
+            <id column="categoryId" property="id"/>
+            <result column="categoryName" property="name"/>
+        </association>
+    </resultMap>
+
+    <insert id="save" parameterType="com.hosuke.model.Article">
+        INSERT INTO t_article VALUES
+            (#{id}, #{categoryId}, #{userId}, #{title}, #{content}, #{markDown}, #{pubDate}, #{clicks}, #{remark},
+             #{picture}, #{isDraft})
+    </insert>
+
+
+    <delete id="delete" parameterType="com.hosuke.model.Article">
+        DELETE FROM t_article
+        WHERE articleId = #{id}
+    </delete>
+
+    <select id="getArticleLiteDtos" resultMap="ArticleLiteDto">
+        SELECT *
+        FROM t_user, t_article
+        WHERE t_user.userId = t_article.userId
+    </select>
+
+    <select id="search" resultMap="ArticleDto" parameterType="java.lang.String">
+        SELECT *
+        FROM t_article article, t_category category, t_user tuser
+        WHERE article.categoryId = category.categoryId AND article.userId = tuser.userId AND
+              title LIKE CONCAT(CONCAT('%', #{title}), '%')
+        ORDER BY pubDate DESC
+    </select>
+
+
+    <select id="getArticleDto" resultMap="ArticleDto" parameterType="integer">
+        SELECT *
+        FROM t_article article, t_category category, t_user tuser
+        WHERE article.categoryId = category.categoryId AND article.userId = tuser.userId AND article.articleId = #{id}
+    </select>
+
+
+    <select id="count" resultType="java.lang.Integer">
+        SELECT COUNT(*)
+        FROM t_article
+        WHERE categoryId > 0
+    </select>
+
+    <update id="update" parameterType="com.hosuke.model.Article">
+        UPDATE t_article
+        SET categoryId = #{categoryId}, title = #{title}, content = #{content}, remark = #{remark},
+            markDown   = #{markDown}
+        WHERE articleId = #{id}
+    </update>
+
+    <update id="updateArticleClicks">
+        UPDATE t_article
+        SET clicks = #{0}
+        WHERE articleId = #{1}
+    </update>
+
+    <select id="pagerAction" resultMap="ArticleDto" parameterType="com.hosuke.util.Pager">
+        SELECT *
+        FROM t_article article, t_category category, t_user tuser
+        WHERE article.categoryId = category.categoryId AND article.userId = tuser.userId
+        ORDER BY pubDate DESC
+        LIMIT #{startIndex}, #{pageSize}
+    </select>
+
+    <select id="getNextArticleDto" parameterType="java.lang.Integer" resultMap="ArticleLiteDto">
+        SELECT *
+        FROM t_article
+        WHERE articleId = (SELECT articleId
+                           FROM t_article
+                           WHERE #{id} > articleId AND categoryId > 0
+                           ORDER BY articleId DESC
+                           LIMIT 1)
+    </select>
+
+    <select id="getPreArticleDto" resultMap="ArticleLiteDto" parameterType="integer">
+        SELECT *
+        FROM t_article
+        WHERE articleId = (SELECT articleId
+                           FROM t_article
+                           WHERE articleId > #{id} AND categoryId > 0
+                           ORDER BY articleId ASC
+                           LIMIT 1);
+    </select>
+
+    <select id="getByCategory" resultMap="ArticleLiteDto">
+        SELECT
+            articleId,
+            title,
+            pubDate
+        FROM t_article
+        WHERE categoryId = #{categoryId}
+        ORDER BY pubDate DESC
+    </select>
+
+    <select id="archive" resultMap="ArticleLiteDto">
+        SELECT
+            articleId,
+            title,
+            pubDate
+        FROM t_article
+        WHERE categoryId > 0
+        ORDER BY pubDate DESC
+    </select>
+
+</mapper>

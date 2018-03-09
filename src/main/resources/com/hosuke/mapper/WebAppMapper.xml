@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hosuke.dao.WebAppDao">
+    <resultMap id="WebApp" type="com.hosuke.model.WebApp">
+        <id column="id" property="id"/>
+        <result column="name" property="webName"/>
+        <result column="title" property="webTitle"/>
+        <result column="userPage" property="userPageArticleSize"/>
+        <result column="adminPage" property="adminPageArticleSize"/>
+    </resultMap>
+    <resultMap id="WebAppDto" type="com.hosuke.model.dto.WebAppDto">
+        <id column="id" property="id"/>
+        <result column="name" property="webName"/>
+        <result column="title" property="webTitle"/>
+        <result column="userPage" property="userPageArticleSize"/>
+        <result column="adminPage" property="adminPageArticleSize"/>
+    </resultMap>
+    <update id="update" parameterType="WebApp">
+        UPDATE t_web
+        <set>
+            <if test="webName!=null">name = #{webName},</if>
+            <if test="webTitle!=null">title = #{webTitle},</if>
+            <if test="userPageArticleSize!=null">userPage = #{userPageArticleSize},</if>
+            <if test="adminPageArticleSize!=null">adminPage = #{adminPageArticleSize}</if>
+        </set>
+        WHERE id = #{id}
+    </update>
+    <select id="getWebDto" resultMap="WebAppDto">
+        SELECT *
+        FROM t_web
+        WHERE id = #{id}
+    </select>
+    <select id="getArticlesView" resultType="java.lang.Integer">
+        SELECT sum(clicks)
+        FROM t_article;
+    </select>
+    <select id="count" resultType="java.lang.Integer">
+        SELECT COUNT(*)
+        FROM t_web;
+    </select>
+    <select id="getWebDtos" resultMap="WebApp">
+        SELECT *
+        FROM t_web;
+    </select>
+
+    <insert id="save">
+        INSERT INTO t_web VALUES (NULL, #{webName}, #{webTitle}, #{userPageArticleSize}, #{adminPageArticleSize})
+    </insert>
+</mapper>

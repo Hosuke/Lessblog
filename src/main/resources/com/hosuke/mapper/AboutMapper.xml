@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hosuke.dao.AboutDao">
+    <resultMap id="about" type="com.hosuke.model.About">
+        <id column="aboutId" property="id"/>
+        <result column="markDown" property="markDown"/>
+        <result column="content" property="content"/>
+    </resultMap>
+
+    <insert id="save">
+        INSERT INTO t_about VALUES (NULL, #{markDown}, #{content})
+    </insert>
+
+    <update id="upDate">
+        UPDATE t_about
+        SET content = #{content}, markDown = #{markDown}
+        WHERE aboutId = #{id}
+    </update>
+
+    <delete id="delete">
+        DELETE FROM t_about
+        WHERE aboutId = #{id}
+    </delete>
+
+    <select id="getAbout" resultMap="about">
+        SELECT *
+        FROM t_about
+        WHERE aboutId = #{id}
+    </select>
+
+    <select id="count" resultType="java.lang.Integer">
+        SELECT COUNT(*) AS total
+        FROM t_about
+    </select>
+
+    <select id="list" resultMap="about">
+        SELECT *
+        FROM t_about
+    </select>
+
+
+</mapper>

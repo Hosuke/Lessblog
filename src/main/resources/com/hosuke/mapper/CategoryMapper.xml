@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hosuke.dao.CategoryDao">
+
+    <resultMap id="category" type="com.hosuke.model.Category">
+        <id column="categoryId" property="id"/>
+        <result column="categoryName" property="name"/>
+    </resultMap>
+
+    <resultMap id="categoryDto" type="com.hosuke.model.dto.CategoryDto">
+        <id column="categoryId" property="id"/>
+        <result column="categoryName" property="name"/>
+        <result column="categoryCount" property="count"/>
+    </resultMap>
+
+
+    <insert id="save">
+        INSERT INTO t_category VALUES (NULL, #{name})
+    </insert>
+
+    <update id="update">
+        UPDATE t_category
+        SET categoryName = #{name}
+        WHERE categoryId = #{id}
+    </update>
+
+
+    <delete id="delete">
+        DELETE FROM t_category
+        WHERE categoryId = #{id}
+    </delete>
+
+    <select id="all" resultMap="categoryDto">
+        SELECT
+            t_category.categoryId,
+            t_category.categoryName,
+            COUNT(articleId) AS categoryCount
+        FROM t_article
+            RIGHT JOIN t_category ON t_article.categoryId = t_category.categoryId
+        GROUP BY t_category.categoryId
+    </select>
+
+    <select id="get" resultMap="category">
+        SELECT *
+        FROM t_category
+        WHERE categoryId = #{id}
+    </select>
+
+    <select id="exist" resultType="java.lang.Integer">
+        SELECT *
+        FROM t_article
+        WHERE categoryId = #{categoryId}
+    </select>
+
+    <select id="pagenation" resultMap="categoryDto">
+        SELECT *
+        FROM t_category
+        ORDER BY categoryId DESC
+        LIMIT #{startIndex}, #{pageSize};
+    </select>
+
+    <select id="count" resultType="java.lang.Integer">
+        SELECT COUNT(*) AS total
+        FROM t_category
+        WHERE categoryId > 0
+    </select>
+
+
+</mapper>
