@@ -4,7 +4,7 @@ import com.hosuke.dao.CategoryDao;
 import com.hosuke.model.Category;
 import com.hosuke.model.dto.CategoryDto;
 import com.hosuke.service.CategoryService;
-import com.hosuke.utils.Pager;
+import com.hosuke.util.Pager;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

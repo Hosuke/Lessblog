@@ -4,37 +4,11 @@
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <!--mybatis 核心配置文件，任何地方都可以获取-->
 <configuration>
-
-    <properties resource="jdbc.properties">
-
-    </properties>
-
-    <settings>
-        <setting name="aggressiveLazyLoading" value="true"/>
-        <setting name="lazyLoadingEnabled" value="false"/>
-        <setting name="cacheEnabled" value="true"/>
-    </settings>
-
-    <typeAliases>
-        <package name="com.hosuke.entity"></package>
-    </typeAliases>
-
-    <!--环境集合-->
-    <environments default="development">
-        <environment id="development">
-            <!--事务管理器-->
-            <transactionManager type="JDBC"/>
-            <dataSource type="POOLED">
-                <property name="driver" value="${db.driver}"/>
-                <property name="url" value="${db.url}"/>
-                <property name="username" value="${db.user}"/>
-                <property name="password" value="${db.password}"/>
-            </dataSource>
-        </environment>
-    </environments>
-
-    <!--映射器-->
     <mappers>
-        <package name="com.hosuke.mapper"/>
+        <mapper resource="com/hosuke/mapper/UserMapper.xml"/>
+        <mapper resource="com/hosuke/mapper/CategoryMapper.xml"/>
+        <mapper resource="com/hosuke/mapper/ArticleMapper.xml"/>
+        <mapper resource="com/hosuke/mapper/AboutMapper.xml"/>
+        <mapper resource="com/hosuke/mapper/WebAppMapper.xml"/>
     </mappers>
 </configuration>

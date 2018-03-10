@@ -2,7 +2,7 @@ package com.hosuke.service;
 
 import com.hosuke.model.Category;
 import com.hosuke.model.dto.CategoryDto;
-import com.hosuke.utils.Pager;
+import com.hosuke.util.Pager;
 
 import java.util.List;
 

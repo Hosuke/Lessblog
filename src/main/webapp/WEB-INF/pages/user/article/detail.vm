@@ -1,0 +1,60 @@
+##非空判断
+#if($error)
+<div class="alert alert-warning">
+    <a href="#" class="close" data-dismiss="alert">
+        &times;
+    </a>
+    <strong><h1>错误:</h1></strong>
+
+    <h3>${error}</h3>
+    <a href="/">返回首页</a>
+</div>
+#else
+<ol class="breadcrumb">
+    <li><a href="/">首页</a></li>
+    <li><a
+            href="/category/${article.category.id}">${article.category.name}</a></li>
+    <li class="active">${article.title}</li>
+</ol>
+
+<article class="well">
+    <section class="article-content clearfix article-page">
+        ${article.content}
+    </section>
+    <div align="center">
+        <section class="article-copyright">
+            <p>
+                上一篇：<a
+                    href="/article/$!{preArticle.id}">$!{preArticle.title}</a>
+                下一篇：<a
+                    href="/article/$!{nextArticle.id}">$!{nextArticle.title}</a>
+            </p>
+
+            <p>
+                转载注明：<a href="/about">SuperS</a>&gt;&gt;<a
+                    href="/article/${article.id}">${article.title}</a>
+            </p>
+        </section>
+    </div>
+</article>
+<section>
+    <div class="ds-thread" data-thread-key="${article.id}" data-title="${article.title}"
+         data-url="/article/${article.id}"></div>
+    <!-- 多说评论框 end -->
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+        var duoshuoQuery = {short_name: "hosuke"};
+        (function () {
+            var ds = document.createElement('script');
+            ds.type = 'text/javascript';
+            ds.async = true;
+            ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+            ds.charset = 'UTF-8';
+            (document.getElementsByTagName('head')[0]
+            || document.getElementsByTagName('body')[0]).appendChild(ds);
+        })();
+    </script>
+</section>
+#end
+
+

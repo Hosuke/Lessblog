@@ -2,7 +2,7 @@ package com.hosuke.dao;
 
 import com.hosuke.model.User;
 import com.hosuke.model.dto.UserDto;
-import com.hosuke.utils.Pager;
+import com.hosuke.util.Pager;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;

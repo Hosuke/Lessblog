@@ -1,0 +1,53 @@
+#if($error)
+<div class="alert alert-warning">
+    <a href="#" class="close" data-dismiss="alert">
+        &times;
+    </a>
+    <strong><h1>错误:</h1></strong>
+
+    <h3>${error}</h3>
+    <a href="/">返回首页</a>
+</div>
+#end
+
+#if(!$error)
+<ol class="breadcrumb">
+    <li><a href="/">首页</a></li>
+    <li><a href="/category/list">分类</a></li>
+    <li class="active">${category.name}</li>
+</ol>
+
+    #if(!$articles)
+    <div class="alert alert-warning">
+        <a href="#" class="close" data-dismiss="alert">
+            &times;
+        </a>
+        <strong><h1>提示:</h1></strong>
+
+        <h3>此分类下没有文章。</h3>
+    </div>
+    #end
+
+
+    #if($articles)
+    <table class="table table-striped table-hover  table-condensed">
+        <tbody>
+            #foreach($article in $articles)
+            <tr>
+                <td width="50%" align="right">
+                    ${article.pubDate}:
+                </td>
+                <td width="50%" align="left">
+                    <a href="/article/${article.id}">${article.title}</a>
+                </td>
+            </tr>
+            #end
+        </tbody>
+    </table>
+    #end
+#end
+
+
+
+
+

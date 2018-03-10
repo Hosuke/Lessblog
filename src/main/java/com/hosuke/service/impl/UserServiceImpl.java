@@ -4,7 +4,7 @@ import com.hosuke.dao.UserDao;
 import com.hosuke.model.User;
 import com.hosuke.model.dto.UserDto;
 import com.hosuke.service.UserService;
-import com.hosuke.utils.Pager;
+import com.hosuke.util.Pager;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

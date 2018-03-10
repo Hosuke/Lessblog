@@ -1,0 +1,14 @@
+<ol class="breadcrumb">
+    <li><a href="/">首页</a></li>
+    <li class="active">分类</li>
+</ol>
+<div class="category">
+    <ul class="list-group">
+        #foreach($category in $categories)
+            <li class="list-group-item">
+                <span class="badge">${category.count}</span>
+                <a href="/category/${category.id}">${category.name}</a>
+            </li>
+        #end
+    </ul>
+</div>

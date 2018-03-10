@@ -1,0 +1,124 @@
+<!--<link rel="stylesheet" href="/editor/css/style.css"/>-->
+<link rel="stylesheet" href="/static/user/editor/css/editormd.css"/>
+
+<section class="content-header">
+    #if($error)
+        <div class="callout callout-warning">
+            <h4>发表文章出现问题</h4>
+
+            <p>${error}</p>
+        </div>
+    #end
+
+</section>
+
+#if($article)
+<script type="text/javascript">
+    onload = function () {
+        document.getElementById("category${article.category.id}").selected = true;
+        document.getElementById("articletitle").value = '${article.title}';
+        document.getElementById("articleId").innerText = '${article.id}';
+        document.getElementById("myButton").innerHTML = "修改文章";
+    }
+</script>
+#end
+
+
+
+<section class="content">
+    <script src="/static/user/editor/js/jquery.min.js"></script>
+    <script src="/static/user/editor/js/editormd.min.js"></script>
+
+
+    <form action="#if($article)/manage/article/update/${article.id}#else/manage/article/create#end" method="post">
+        <div class="row">
+            <div class="box box-default">
+                <div class="box-header with-border">
+                    <h6>文章基本信息:</h6>
+
+                    <div class="box-tools pull-right">
+                        <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                    </div>
+                </div>
+                <div class="box-body" style="display:block;">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="articletitle">文章标题:</label>
+                                <input type="text" name="title" class="form-control" id="articletitle"
+                                       placeholder="请输入文章标题..."/>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>文章分类:</label>
+                                <select name="categoryId" id="sel"
+                                        class="form-control select2 select2-hidden-accessible"
+                                        style="width: 100%;" tabindex="-1" aria-hidden="true">
+                                    #foreach($category in $categories)
+                                        <option value="${category.id}"
+                                                id="category${category.id}">${category.name}</option>
+                                    #end
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>文章简介:</label>
+                                <textarea name="remark" class="form-control" rows="3"
+                                          placeholder="请输入文章简介...">#if($article)${article.remark}#end</textarea>
+                            </div>
+                            <textarea id="articlecontent" name="content" style="display:none"></textarea>
+                            <textarea id="userid" name="userId" style="display: none">${user.id}</textarea>
+                            <textarea id="articleId" name="id" style="display: none"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="layout">
+            <div id="editormd">
+                <textarea id="articleMarkDown" name="markDown" style="display:none;">#if($article)${article.markDown}#end</textarea>
+            </div>
+        </div>
+
+        <script type="text/javascript">
+            function Submit() {
+                document.getElementById("articlecontent").value = document.getElementById("myhtmlcontent").innerHTML;
+            }
+        </script>
+
+        <script type="text/javascript">
+            var testEditor;
+            $(function () {
+                testEditor = editormd("editormd", {
+                    width: "94%",
+                    height: 640,
+                    syncScrolling: "single",
+                    path: "/static/user/editor/lib/"
+                });
+
+                /*
+                 testEditor = editormd({
+                 id: "test-editormd",
+                 width: "90%",
+                 height: 640,
+                 path: "/editor/lib/"
+                 });*/
+
+            });
+        </script>
+        <div class="row">
+            <div class="col-md-3"></div>
+
+            <div class="col-md-6">
+                <button type="submit" id="myButton" class="btn btn-block btn-default btn-lg"
+                        onclick="javascript:Submit();">发表文章
+                </button>
+            </div>
+        </div>
+    </form>
+</section>

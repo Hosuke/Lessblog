@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>SBlog后台管理</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <!-- Bootstrap 3.3.5 -->
+    <link rel="stylesheet" href="/static/adminLTE/bootstrap/css/bootstrap.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+
+    <link rel="stylesheet" href="/static/adminLTE/dist/css/AdminLTE.min.css">
+    <!-- AdminLTE Skins. Choose a skin from the css/skins
+         folder instead of downloading all of them to reduce the load. -->
+    <link rel="stylesheet" href="/static/adminLTE/dist/css/skins/_all-skins.min.css">
+    <link rel="stylesheet" href="/static/user/editor/css/editormd.css"/>
+
+</head>
+<body class="hold-transition skin-blue sidebar-mini">
+<div class="wrapper">
+
+    <header class="main-header">
+        <!-- Logo -->
+        <a href="/manage" class="logo">
+            <!-- mini logo for sidebar mini 50x50 pixels -->
+            <span class="logo-mini"><b>S</b>og</span>
+            <!-- logo for regular state and mobile devices -->
+            <span class="logo-lg"><b>S</b>blog</span>
+        </a>
+        <!-- Header Navbar: style can be found in header.less -->
+        <nav class="navbar navbar-static-top" role="navigation">
+            <!-- Sidebar toggle button-->
+            <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+                <span class="sr-only">Toggle navigation</span>
+            </a>
+
+            <div class="navbar-custom-menu">
+                <ul class="nav navbar-nav">
+                    <!-- User Account: style can be found in dropdown.less -->
+                    <li class="dropdown user user-menu">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <img src="${user.imagePath}" class="user-image" alt="User Image">
+                            <span class="hidden-xs">管理员:${user.nickname}</span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <!-- User image -->
+                            <li class="user-header">
+                                <img src="${user.imagePath}" class="img-circle" alt="User Image">
+                                <p>
+                                    ${user.nickname}
+                                    <small>管理员</small>
+                                </p>
+                            </li>
+                            <!-- Menu Footer-->
+                            <li class="user-footer">
+                                <div class="pull-left">
+                                    <a href="/manage/user/update/${user.id}" class="btn btn-default btn-flat">设置</a>
+                                </div>
+                                <div class="pull-right">
+                                    <a href="/logout" class="btn btn-default btn-flat">退出</a>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <!-- Left side column. contains the logo and sidebar -->
+    <aside class="main-sidebar">
+        <!-- sidebar: style can be found in sidebar.less -->
+        <section class="sidebar">
+            <!-- Sidebar user panel -->
+            <div class="user-panel">
+                <div class="pull-left image">
+                    <img src="${user.imagePath}" class="img-circle" alt="User Image">
+                </div>
+                <div class="pull-left info">
+                    <p>${user.nickname}</p>
+                    <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+                </div>
+            </div>
+
+            <!-- sidebar menu: : style can be found in sidebar.less -->
+            <ul class="sidebar-menu">
+                <li class="header">MAIN</li>
+                <li class="treeview">
+                    <a href="#">
+                        <i class="fa fa-book"></i> <span>文章管理</span> <i class="fa fa-angle-left pull-right"></i>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="/manage/article/create"><i class="fa fa-circle-o"></i> 创建文章</a></li>
+                        <li><a href="/manage/article"><i class="fa fa-circle-o"></i> 编辑文章</a></li>
+                    </ul>
+                </li>
+
+                <li class="treeview">
+                    <a href="#">
+                        <i class="fa fa-bars"></i> <span>分类管理</span> <i class="fa fa-angle-left pull-right"></i>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="/manage/category"><i class="fa fa-circle-o"></i> 编辑分类</a></li>
+                    </ul>
+                </li>
+
+
+
+                <li class="treeview">
+                    <a href="#">
+                        <i class="fa fa-users"></i> <span>帐户管理</span> <i class="fa fa-angle-left pull-right"></i>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="/manage/user"><i class="fa fa-circle-o"></i> 编辑帐户</a></li>
+                    </ul>
+                </li>
+                <!--
+                <li class="treeview">
+                    <a href="#">
+                        <i class="fa fa-file-image-o"></i> <span>图片管理</span> <i class="fa fa-angle-left pull-right"></i>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="链接"><i class="fa fa-circle-o"></i> 上传图片</a></li>
+                        <li><a href="链接"><i class="fa fa-circle-o"></i> 删除图片</a></li>
+                    </ul>
+                </li>
+                -->
+                <li class="treeview">
+                    <a href="#">
+                        <i class="fa fa-globe"></i> <span>网站管理</span> <i class="fa fa-angle-left pull-right"></i>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="/manage/web"><i class="fa fa-circle-o"></i>基础设置</a></li>
+                    </ul>
+                </li>
+                <li class="treeview">
+                    <a href="#">
+                        <i class="fa fa-heart"></i> <span>关于管理</span> <i class="fa fa-angle-left pull-right"></i>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="/manage/about"><i class="fa fa-circle-o"></i> 修改关于</a></li>
+                    </ul>
+                </li>
+
+
+            </ul>
+        </section>
+        <!-- /.sidebar -->
+    </aside>
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        #parse(${mainPage})
+    </div>
+    <footer class="main-footer">
+        <div class="pull-right hidden-xs">
+            <b>Version</b> 2.3.0
+        </div>
+        <strong>Copyright &copy; 2014-2015 <a href="http://almsaeedstudio.com">Almsaeed Studio</a>.</strong> All rights
+        reserved.
+    </footer>
+    <!-- Control Sidebar -->
+    <div class="control-sidebar-bg"></div>
+</div>
+<!-- ./wrapper -->
+
+
+<!-- jQuery 2.1.4 -->
+<script src="/static/user/widget/jquery/jQuery-2.1.4.min.js"></script>
+<!-- Bootstrap 3.3.5 -->
+<script src="/static/adminLTE/bootstrap/js/bootstrap.min.js"></script>
+<!-- AdminLTE App -->
+<script src="/static/adminLTE/dist/js/app.min.js"></script>
+
+
+</body>
+</html>

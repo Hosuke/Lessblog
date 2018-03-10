@@ -5,7 +5,7 @@ import com.hosuke.model.Article;
 import com.hosuke.model.dto.ArticleDto;
 import com.hosuke.model.dto.ArticleLiteDto;
 import com.hosuke.service.ArticleService;
-import com.hosuke.utils.Pager;
+import com.hosuke.util.Pager;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

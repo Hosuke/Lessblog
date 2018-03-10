@@ -1,0 +1,74 @@
+/*文章－标题*/
+.title-article {
+  padding: 20px 15px 0px 15px;
+}
+@media (max-width: 767px) {
+  .title-article {
+    padding: 0px;
+  }
+}
+.title-article h1 {
+  font-size: 32px;
+  margin: 0 auto;
+  text-align: center;
+}
+.title-article h1 a {
+  color: #3d4450;
+}
+.title-article h1 a:hover {
+  color: #d9534f;
+  text-decoration: none;
+  -webkit-transition: all .3s ease;
+  -moz-transition: all .3s ease;
+  -o-transition: all .3s ease;
+  transition: all .3s ease;
+}
+
+.tag-article {
+  text-align: center;
+  line-height: 24px;
+  margin: 20px;
+}
+/*文章－内容*/
+.centent-article .thumbnail {
+  margin-bottom: 20px;
+  align-content: center;
+  text-align: center;
+}
+
+
+.label {
+  margin-right: 5px;
+  font-size: 90%;
+  color: #00232c;
+}
+
+.alert {
+  padding: 15px;
+  margin-bottom: 20px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  overflow: auto;
+}
+.alert.alert-dismissable {
+  padding-right: 35px;
+}
+.alert-zan {
+  color: #666666;
+  background-color: #eeeeee;
+  border: 1px solid #eeeeee;
+}
+.alert-info {
+  color: #3a87ad;
+  background-color: #d9edf7;
+  border-color: #bce8f1;
+}
+.zan-footer {
+  display: block;
+  text-align: center;
+  color: #EEE;
+  padding: 50px;
+  background-color: #3D4450;
+}
+
+

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>${webAppDto.webTitle}</title>
+    <link rel="stylesheet" href="/static/user/css/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="/static/user/widget/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/user/editor/css/editormd.css"/>
+    <script src="/static/user/widget/jquery/jquery.min.js"></script>
+    <script src="/static/user/widget/bootstrap/js/bootstrap.min.js"></script>
+    <style type="text/css">
+        body {
+            padding-top: 60px;
+            padding-bottom: 40px;
+        }
+    </style>
+</head>
+<body>
+#parse("common/header.vm")
+<div class="container-fluid">
+    <div class="row">
+        <!--留空-->
+        <div class="col-md-1"></div>
+            <div class="col-md-10">
+                #parse(${mainPage})
+            </div>
+    </div>
+
+</div>
+#parse("common/footer.vm")
+</body>
+</html>

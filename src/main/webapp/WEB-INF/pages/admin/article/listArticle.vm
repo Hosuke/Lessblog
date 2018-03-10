@@ -1,0 +1,139 @@
+<style>
+    .tableCenter th, .tableCenter td {
+        text-align: center;
+        height: 38px;
+    }
+</style>
+
+<script language="javascript">
+    function delcfm() {
+        if (!confirm("确认要删除?")) {
+            window.event.returnValue = false;
+        }
+    }
+</script>
+<section class="content-header">
+    #if($error)
+        <div class="callout callout-warning">
+            <h4>发表文章出现问题</h4>
+
+            <p>${error}</p>
+        </div>
+    #end
+
+
+    #if($info)
+        <div class="callout callout-info">
+            <h4>提示信息:</h4>
+
+            <p>${info}</p>
+        </div>
+    #end
+</section>
+
+<section class="content">
+
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box">
+                <div class="box-header">
+                    <h3 class="box-title">文章信息</h3>
+
+                    <div class="box-tools">
+                        <form method="post" action="/manage/article/search">
+                            <div class="input-group" style="width: 150px;">
+                                <input type="text" name="content" class="form-control input-sm pull-right"
+                                       placeholder="搜索文章(标题)">
+
+                                <div class="input-group-btn">
+                                    <button class="btn btn-sm btn-default"><i class="fa fa-search"></i></button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="box-body table-responsive no-padding">
+                    <table class="table table-hover tableCenter">
+                        <tbody>
+                        <tr>
+                            <th>ID</th>
+                            <th>标题</th>
+                            <th>分类</th>
+                            <th>作者</th>
+                            <th>日期</th>
+                            <th>浏览</th>
+                            <th>编辑</th>
+                            <th>删除</th>
+                        </tr>
+                            #foreach($article in $articles)
+                            <tr>
+                                <td>${article.id}</td>
+                                <td>${article.title}</td>
+                                <td>${article.category.name}</td>
+                                <td>${article.user.nickname}</td>
+                                <td>${article.pubDate}</td>
+                                <td><span class="badge bg-red">${article.clicks}</span></td>
+                                <td>
+                                    <button class="btn btn-block btn-info btn-sm"><a
+                                            href="/manage/article/update/${article.id}">编辑</a></button>
+                                </td>
+                                <td>
+                                    <button class="btn btn-block btn-danger btn-sm" onclick="delcfm()"><a
+                                            href="/manage/article/delete/${article.id}">删除</a></button>
+                                </td>
+                            </tr>
+                            #end
+                        </tbody>
+
+                    </table>
+                </div>
+
+                <div class="box-footer clearfix">
+                    <ul class="pagination pagination-sm no-margin pull-right">
+                        <li><a href="/manage/article/?currentPage=${pager.firstPage}">首页</a></li>
+
+                        #if(${pager.prePage}!=-1)
+                            <li><a href="/manage/article/?currentPage=${pager.prePage}">上一页</a></li>
+                        #else
+                            <li class="disabled"><a href="">上一页</a></li>
+                        #end
+                        #if(${pager.nextPage}==-1)
+                            #set($prePage = ${pager.currentPage} - 2)
+                            #if($prePage>0)
+                                <li><a href="/manage/article/?currentPage=${prePage}">${prePage}</a></li>
+                            #end
+                        #end
+
+                        #if(${pager.prePage} != -1)
+                            <li><a href="/manage/article/?currentPage=${pager.prePage}">${pager.prePage}</a></li>
+                        #end
+
+                        <li class="active"><a
+                                href="/manage/article/?currentPage=${pager.currentPage}">${pager.currentPage}</a>
+                        </li>
+
+                        #if(${pager.nextPage}!=-1)
+                            <li><a href="/manage/article/?currentPage=${pager.nextPage}">${pager.nextPage}</a></li>
+                        #end
+
+                        #if(${pager.prePage}==-1)
+                            #set($nextPage = ${pager.nextPage} + 1)
+                            #if($nextPage!=0)
+                                <li><a href="/manage/article/?currentPage=${nextPage}">${nextPage}</a></li>
+
+                            #end
+                        #end
+
+                        #if(${pager.nextPage}!= -1)
+                            <li><a href="/manage/article/?currentPage=${pager.nextPage}">下一页</a></li>
+                        #else
+                            <li class="disabled"><a href="">下一页</a></li>
+                        #end
+                        <li><a href="/manage/article/?currentPage=${pager.lastPage}">末页</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,95 @@
+<link rel="stylesheet" href="/static/user/css/article.css" rel="stylesheet">
+#foreach($article in $articles)
+<div class="article well clearfix">
+    <!-- PC显示 -->
+    <section class="hidden-xs">
+        <div class="title-article">
+            <h1><a href="/article/${article.id}">
+                ${article.title}</a></h1>
+        </div>
+        <div class="tag-article">
+            <span class="label label-zan"><i class="fa fa-tags"></i><a href="/category/${article.category.id}"
+                                                                       rel="author"> ${article.category.name}</a></span>
+            <span class="label label-zan"><i class="fa fa-user"></i> ${article.user.nickname}</span>
+            <span class="label label-zan"><i class="fa fa-eye"></i> ${article.clicks}</span>
+            <span class="label label-zan"><i class="fa fa-clock-o"></i> ${article.pubDate} </span>
+        </div>
+        <div class="content-article">
+            <div class="alert alert-zan" align="center">${article.remark}</div>
+        </div>
+        <a class="btn btn-danger pull-right read-more" href="/article/${article.id}">阅读全文</a>
+    </section>
+    <!-- 移动设备-->
+    <section class="visible-xs  visible-sm">
+
+        <div class="title-article" align="center">
+
+            <h4><a href="/article/${article.id}">${article.title}</a></h4>
+
+        </div>
+
+        <p>
+            <i class="fa fa-tags"></i><a href="/category/${article.category.id}" rel="author"> ${article.category.name}</a>
+            <i class="fa fa-user"></i> ${article.user.nickname}
+            <i class="fa fa-eye"></i> ${article.clicks}
+            <i class="fa fa-clock-o"></i> ${article.pubDate}
+        </p>
+
+        <div class="content-article">
+            <div class="alert alert-zan" align="center">
+                ${article.remark}
+            </div>
+
+        </div>
+
+        <a class="btn btn-danger pull-right read-more btn-block" href="/article/${article.id}">阅读全文</a>
+    </section>
+</div>
+#end
+
+#if(!${search})
+<div class="page-nav" align="center">
+    <ul class="pagination">
+        <li><a href="/?pageIndex=${pager.firstPage}">首页</a></li>
+
+        #if(${pager.prePage}!=-1)
+            <li><a href="/?pageIndex=${pager.prePage}">上一页</a></li>
+        #else
+            <li class="disabled"><a href="">上一页</a></li>
+        #end
+        #if(${pager.nextPage}==-1)
+            #set($prePage = ${pager.currentPage} - 2)
+            <li><a href="/?pageIndex=${prePage}">${prePage}</a></li>
+        #end
+
+        #if(${pager.prePage}!=-1)
+            <li><a href="/?pageIndex=${pager.prePage}">${pager.prePage}</a></li>
+        #end
+
+        <li class="active"><a href="/?pageIndex=${pager.currentPage}">${pager.currentPage}</a></li>
+
+        #if(${pager.nextPage}!=-1)
+            <li><a href="/?pageIndex=${pager.nextPage}">${pager.nextPage}</a></li>
+        #end
+
+        #if(${pager.prePage}==-1)
+            #set($nextPage = ${pager.nextPage} + 1)
+            <li><a href="/?pageIndex=${nextPage}">${nextPage}</a></li>
+        #end
+
+        #if(${pager.nextPage}!= -1)
+            <li><a href="/?pageIndex=${pager.nextPage}">下一页</a></li>
+        #else
+            <li class="disabled"><a href="">下一页</a></li>
+        #end
+        <li><a href="/?pageIndex=${pager.lastPage}">末页</a></li>
+    </ul>
+</div>
+#end
+
+#if($search)
+<div align="center">
+    <h3>${info}</h3>
+    <a href="/">返回首页</a>
+</div>
+#end

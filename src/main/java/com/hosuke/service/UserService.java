@@ -2,7 +2,7 @@ package com.hosuke.service;
 
 import com.hosuke.model.User;
 import com.hosuke.model.dto.UserDto;
-import com.hosuke.utils.Pager;
+import com.hosuke.util.Pager;
 
 import java.util.List;
 

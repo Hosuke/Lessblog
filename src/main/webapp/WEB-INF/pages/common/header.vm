@@ -1,0 +1,43 @@
+
+<header>
+	<nav class="navbar navbar-inverse navbar-fixed-top">
+		<div class="container">
+			<div class="navbar-header">
+				<button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target=".navbar-collapse">
+					<span class="sr-only">${webAppDto.webName}</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="/">${webAppDto.webName}</a>
+			</div>
+			<div class="navbar-collapse collapse" role="navigation">
+				<ul class="nav navbar-nav">
+
+					
+					<li><a href="/"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>&nbsp;首页</a></li>
+					<li><a href="/category/list"><span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>&nbsp;分类</a></li>
+					<li><a href="/archive"><span class="glyphicon glyphicon-inbox" aria-hidden="true"></span>&nbsp;归档</a></li>
+					<li><a href="/leave"><span class="glyphicon glyphicon-leaf" aria-hidden="true"></span>&nbsp;留言</a></li>
+					<li><a href="/about"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>&nbsp;关于</a></li>
+				</ul>
+				<form class="navbar-form navbar-right" method="post" action="/search">
+					<div class="form-group">
+						<input type="text" id="s_content" name="content" placeholder="Search Title" class="form-control"/>
+					</div>
+					<button type="submit" class="btn btn-success">Go</button>
+				</form>
+			</div>
+		</div>
+	</nav>
+	<script>
+		var _hmt = _hmt || [];
+		(function() {
+			var hm = document.createElement("script");
+			hm.src = "//hm.baidu.com/hm.js?f2fcc1636c33c8e48c709ac2d8f235f5";
+			var s = document.getElementsByTagName("script")[0];
+			s.parentNode.insertBefore(hm, s);
+		})();
+	</script>
+
+</header>

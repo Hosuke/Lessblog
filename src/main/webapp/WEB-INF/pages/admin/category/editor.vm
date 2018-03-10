@@ -1,0 +1,116 @@
+<section class="content-header">
+    #if($error)
+        <div class="callout callout-warning">
+            <h4>编辑分类出现问题</h4>
+
+            <p>${error}</p>
+        </div>
+    #end
+
+    #if($info)
+        <div class="callout callout-info">
+            <h4>编辑信息</h4>
+
+            <p>${info}</p>
+        </div>
+    #end
+</section>
+<style>
+    .tableCenter th, .tableCenter td {
+        text-align: center;
+        height: 38px;
+    }
+</style>
+
+<script language="javascript">
+    function delcfm() {
+        if (!confirm("确认要删除？")) {
+            window.event.returnValue = false;
+        }
+    }
+</script>
+#if($category)
+<script language="javascript">
+    onload = function () {
+        document.getElementById("categoryname").value = '${category.name}';
+        document.getElementById("categoryid").innerText = '${category.id}';
+        document.getElementById("createbutton").innerHTML = '修改分类';
+        document.getElementById("categoryfrom").action = "/manage/category/update";
+    }
+</script>
+#end
+<section class="content">
+    <form id="categoryfrom" action="/manage/category/create" method="post">
+        <div class="row">
+            <div class="box box-default">
+                <div class="box-header with-border">
+                    <h6>创建分类:</h6>
+
+                    <div class="box-tools pull-right">
+                        <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                    </div>
+                </div>
+                <div class="box-body" style="display:block;">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="categoryname">分类名称:</label>
+                                <input type="text" name="categoryName" class="form-control" id="categoryname"
+                                       placeholder="请输入分类名称..."/>
+                                <textarea style="display: none" id="categoryid" name="categoryId"></textarea>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="createbutton">😊🌹</label>
+                            <button type="submit" id="createbutton" class="btn btn-block btn-default btn-flat"
+                                    >创建分类
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </form>
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box">
+                <div class="box-header">
+                    <h3 class="box-title">分类信息</h3>
+                </div>
+
+                <div class="box-body table-responsive no-padding">
+                    <table class="table table-hover tableCenter">
+                        <tbody>
+                        <tr>
+                            <th>ID</th>
+                            <th>名称</th>
+                            <th>数量</th>
+                            <th>编辑</th>
+                            <th>删除</th>
+                        </tr>
+                            #foreach($category in $categories)
+                            <tr>
+                                <td width="10%">${category.id}</td>
+                                <td>${category.name}</td>
+                                <td><span class="badge bg-red">${category.count}</span></td>
+                                <td width="10%">
+                                    <button class="btn btn-block btn-info"><a
+                                            href="/manage/category/update/${category.id}">编辑</a></button>
+                                </td>
+                                <td width="10%">
+                                    <button class="btn btn-block btn-danger" onclick="delcfm()"><a
+                                            href="/manage/category/delete/${category.id}">删除</a></button>
+                                </td>
+                            </tr>
+                            #end
+                        </tbody>
+
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</section>

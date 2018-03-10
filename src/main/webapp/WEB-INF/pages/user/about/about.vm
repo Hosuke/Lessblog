@@ -1,0 +1,13 @@
+<ol class="breadcrumb">
+    <li><a href="/">首页</a></li>
+    <li class="active">关于</li>
+</ol>
+
+<article class="well">
+    <section class="article-content clearfix article-page">
+        #if($about)
+            ${about.content}
+        #end
+    </section>
+</article>
+

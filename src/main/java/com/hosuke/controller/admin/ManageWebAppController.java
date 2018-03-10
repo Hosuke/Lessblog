@@ -3,7 +3,7 @@ package com.hosuke.controller.admin;
 import com.hosuke.model.WebApp;
 import com.hosuke.model.dto.WebAppDto;
 import com.hosuke.service.WebAppService;
-import com.hosuke.utils.StringUtil;
+import com.hosuke.util.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;

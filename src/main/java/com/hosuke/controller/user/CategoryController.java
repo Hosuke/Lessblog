@@ -6,7 +6,7 @@ import com.hosuke.model.dto.CategoryDto;
 import com.hosuke.service.ArticleService;
 import com.hosuke.service.CategoryService;
 import com.hosuke.service.WebAppService;
-import com.hosuke.utils.StringUtil;
+import com.hosuke.util.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
